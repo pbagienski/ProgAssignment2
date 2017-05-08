@@ -8,8 +8,10 @@
 
 makeCacheMatrix <- function(x = matrix()) {
         inv <- NULL
+        
         ## Next, define the four functions to be
         ## used as input for cacheSolve
+        
         set <- function(y) {
                 x <<- y
                 inv <<- NULL
@@ -17,7 +19,9 @@ makeCacheMatrix <- function(x = matrix()) {
         get <- function() x
         setinv <- function(solve) inv <<- solve
         getinv <- function() inv
+        
         ## Next, return these functions in a list.
+        
         list(set = set, get = get,
              setinv = setinv,
              getinv = getinv)
@@ -30,13 +34,16 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
         inv <- x$getinv()
+        
         ## If inv is already computed, return its value
+        
         if(!is.null(inv)) {
                 message("getting cached data")
                 return(inv)
         }
         ## If inv has not been computed, calculate and 
         ## return the result.
+        
         data <- x$get()
         inv <- solve(data, ...)
         x$setinv(inv)
